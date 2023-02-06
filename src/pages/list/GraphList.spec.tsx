@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { App } from "./App.stories";
+import { GraphList } from "./GraphList.stories";
 
 test("renders in view", () => {
-  render(<App />);
-  const text = screen.getByText(/App Wrapper/);
+  render(<GraphList />);
+  const text = screen.getByText(/Graph List/);
   expect(text).toBeInTheDocument();
 });

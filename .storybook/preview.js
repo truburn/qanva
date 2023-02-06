@@ -1,12 +1,13 @@
 import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
 import { ThemeProvider } from "react-jss";
-import { theme } from "utils/theme";
+import { theme, GlobalStyles } from "utils/theme";
 
 export const decorators = [
   withTests({ results }),
   (Story) => (
     <ThemeProvider theme={theme}>
+      <GlobalStyles />
       <Story />
     </ThemeProvider>
   ),
