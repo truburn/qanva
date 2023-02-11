@@ -8,4 +8,10 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(tsconfig.compilerOptions.paths, {
     prefix: `<rootDir>/`,
   }),
+  preset: "jest-playwright-preset",
+  testEnvironmentOptions: {
+    "jest-playwright-preset": {
+      browsers: ["chromium", "firefox", "webkit"],
+    },
+  },
 };

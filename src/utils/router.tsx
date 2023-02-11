@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, redirect } from "react-router-dom";
-import GraphEditor from "pages/editor/GraphEditor";
-import GraphList from "pages/list/GraphList";
+import { GraphEditor } from "pages/GraphEditor";
+import { GraphList } from "pages/GraphList";
 
 export const router = createBrowserRouter([
   {
@@ -12,8 +12,12 @@ export const router = createBrowserRouter([
         loader: () => redirect("/editor"),
       },
       {
-        path: "editor",
+        path: "editor/:id?/:filename?",
         element: <GraphEditor />,
+        loader: async (props) => {
+          console.log("Editor Props", props);
+          return null;
+        },
       },
       {
         path: "graphs",
