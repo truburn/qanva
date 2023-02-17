@@ -1,10 +1,12 @@
 import React, { ReactElement } from "react";
 import { headerStyles } from "components/Header";
+import { TextFieldProps } from "library/Forms";
+import { ButtonProps } from "library/Button";
 
 interface IProps {
   children?: ReactElement;
-  input?: any;
-  buttons?: any[];
+  input?: TextFieldProps;
+  buttons?: ButtonProps[];
 }
 
 /**
