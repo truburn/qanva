@@ -1,7 +1,7 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { headerStyles } from "components/Header";
-import { TextFieldProps } from "library/Forms";
-import { ButtonProps } from "library/Button";
+import { TextFieldProps } from "atoms/Forms";
+import { ButtonProps } from "atoms/Button";
 
 interface IProps {
   children?: ReactElement;

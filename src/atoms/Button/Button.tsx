@@ -1,5 +1,4 @@
-import React, { ReactElement } from "react";
-import { buttonStyles } from "library/Button";
+import { buttonStyles } from "atoms/Button";
 
 export interface ButtonProps {}
 

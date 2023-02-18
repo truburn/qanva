@@ -1,19 +1,15 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta } from "@storybook/react";
+import { GraphList } from "pages/GraphList";
 
-import { GraphList as GraphListComponent } from "pages/GraphList";
-
-export default {
-  title: "Pages/GraphList",
-  component: GraphListComponent,
+const meta: Meta<typeof GraphList> = {
+  component: GraphList,
   parameters: {
     layout: "fullscreen",
-    reactRouter: {
-      routePath: "/graphs",
-    },
   },
-} as ComponentMeta<typeof GraphListComponent>;
+};
 
-const Template: ComponentStory<typeof GraphListComponent> = (args) => <GraphListComponent />;
+export default meta;
 
-export const GraphList = Template.bind({});
+export const Default = {
+  render: () => <GraphList />,
+};

@@ -1,29 +1,30 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta } from "@storybook/react";
+import { GraphEditor } from "pages/GraphEditor";
 
-import { GraphEditor as GraphEditorComponent } from "pages/GraphEditor";
-
-export default {
-  title: "Pages/GraphEditor",
-  component: GraphEditorComponent,
+const meta: Meta<typeof GraphEditor> = {
+  component: GraphEditor,
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof GraphEditorComponent>;
+};
 
-const Template: ComponentStory<typeof GraphEditorComponent> = (args) => <GraphEditorComponent />;
+export default meta;
 
-export const NewGraph = Template.bind({});
-NewGraph.parameters = {
-  reactRouter: {
-    routePath: "/editor",
+export const NewGraph = {
+  render: () => <GraphEditor />,
+  parameters: {
+    reactRouter: {
+      routePath: "/editor",
+    },
   },
 };
 
-export const EditGraph = Template.bind({});
-EditGraph.parameters = {
-  reactRouter: {
-    routePath: "/editor/:id/:filename",
-    routeParams: { id: 1, filename: "My Graph" },
+export const EditGraph = {
+  render: () => <GraphEditor />,
+  parameters: {
+    reactRouter: {
+      routePath: "/editor/:id/:filename",
+      routeParams: { id: 1, filename: "My Graph" },
+    },
   },
 };

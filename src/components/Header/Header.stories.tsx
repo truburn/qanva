@@ -1,51 +1,36 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Meta } from "@storybook/react";
+import { Header } from "components/Header";
 
-import { Header as HeaderComponent } from "components/Header";
+const meta: Meta<typeof Header> = {
+  component: Header,
+};
 
-export default {
-  title: "Components/Header",
-  component: HeaderComponent,
-} as ComponentMeta<typeof HeaderComponent>;
-
-const Template: ComponentStory<typeof HeaderComponent> = (args) => <HeaderComponent />;
+export default meta;
 
 /**
  * Header with no content, just the logo
  */
-export const Default = Template.bind({});
-Default.parameters = {
-  docs: {
-    storyDescription: "Header with no content, just the logo",
-  },
+export const Default = {
+  render: () => <Header />,
 };
 
 /**
  * Header with input field
  */
-export const InputField = Template.bind({});
-InputField.parameters = {
-  docs: {
-    storyDescription: "Header with input field",
-  },
+export const InputField = {
+  render: () => <Header />,
 };
 
 /**
  * Header with buttons
  */
-export const Buttons = Template.bind({});
-Buttons.parameters = {
-  docs: {
-    storyDescription: "Header with buttons",
-  },
+export const Buttons = {
+  render: () => <Header />,
 };
 
 /**
  * Header with input and buttons
  */
-export const InputAndButtons = Template.bind({});
-InputAndButtons.parameters = {
-  docs: {
-    storyDescription: "Header with input and buttons",
-  },
+export const InputAndButtons = {
+  render: () => <Header />,
 };

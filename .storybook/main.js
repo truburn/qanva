@@ -1,7 +1,6 @@
 const path = require("path");
-
 module.exports = {
-  stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
@@ -14,9 +13,9 @@ module.exports = {
     "storybook-fixtures",
     "storybook-addon-react-router-v6",
   ],
-  framework: "@storybook/react",
-  core: {
-    builder: "@storybook/builder-webpack5",
+  framework: {
+    name: "@storybook/react-webpack5",
+    options: {},
   },
   typescript: {
     check: false,
@@ -35,7 +34,9 @@ module.exports = {
       pages: path.resolve(__dirname, "../src/pages/"),
       utils: path.resolve(__dirname, "../src/utils/"),
     };
-
     return config;
+  },
+  docs: {
+    autodocs: true,
   },
 };
