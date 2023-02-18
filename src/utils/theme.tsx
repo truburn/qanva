@@ -1,20 +1,10 @@
-import React from "react";
 import { createUseStyles } from "react-jss";
-
-/**
- * Create styles for a component with named prefix
- * @param name
- * @param styles
- * @param options
- * @returns
- */
-export const createStyles = (name: string, styles: any, options?: any) =>
-  createUseStyles(styles, { ...options, name });
 
 export interface ColorProps {
   main: string;
   contrast: string;
 }
+
 export interface ThemeProps {
   [key: string]: any;
   color: {
@@ -26,9 +16,49 @@ export interface ThemeProps {
     success: ColorProps;
     warning: ColorProps;
   };
-  font: Record<string, string>;
-  fontWeight: Record<string, number | string>;
 }
+
+export enum FontFamily {
+  MAIN = `'Quicksand', sans-serif`,
+  HEADER = `'Rock Salt', cursive`,
+  HANDWRITING = `'Nothing You Could Do', cursive`,
+}
+
+export enum FontWeight {
+  THIN = 300,
+  REGULAR = 500,
+  BOLD = 700,
+}
+
+/**
+ * Combine a list of classnames into a single string
+ */
+export type ClassistType = Array<string | undefined | Record<string, boolean>>;
+export const classist = (classNames: ClassistType = []): string => {
+  const classes: string[] = classNames
+    .map((val) => {
+      if (typeof val === "string") return val;
+      if (typeof val === "object") {
+        const [name, addToList] = Object.entries(val)[0];
+        if (addToList) return name;
+      }
+
+      return "";
+    })
+    .filter((name) => name !== "");
+
+  return classes.join(" ");
+};
+
+/**
+ * Create styles for a component with named prefix
+ * @param name Name to prefix to the classname
+ * @param styles Styles to create into classes
+ * @param options Additional options to apply to the classes
+ * @returns
+ */
+export const createStyles = (name: string, styles: any, options?: any) =>
+  createUseStyles(styles, { ...options, name });
 
 /**
  * Style Theme variables
@@ -58,16 +88,6 @@ export const theme: ThemeProps = {
       contrast: "#FFF5EC",
     },
   },
-  font: {
-    main: `'Quicksand', sans-serif`,
-    header: `'Rock Salt', cursive`,
-    handwriting: `'Nothing You Could Do', cursive`,
-  },
-  fontWeight: {
-    thin: 300,
-    regular: 500,
-    bold: 700,
-  },
 };
 
 /**
@@ -78,8 +98,8 @@ const useGlobalStyles = createUseStyles((theme: ThemeProps) => ({
     body: {
       width: "100%",
       height: "100%",
-      fontFamily: theme.font.main,
-      fontWeight: theme.fontWeight.regular,
+      fontFamily: FontFamily.MAIN,
+      fontWeight: FontWeight.REGULAR,
       margin: 0,
       padding: 0,
       background: theme.color.bg,
@@ -102,12 +122,16 @@ const useGlobalStyles = createUseStyles((theme: ThemeProps) => ({
       },
     },
     "h1, h2, h3": {
-      fontFamily: theme.font.header,
+      fontFamily: FontFamily.HEADER,
       color: theme.color.primary.main,
     },
   },
 }));
 
+/**
+ * Empty component to call the global styles hook.
+ * Only use once throughout the entire application, preferably at the base.
+ */
 export const GlobalStyles = () => {
   useGlobalStyles();
   return <></>;
