@@ -1,5 +1,11 @@
 import { createStyles, ThemeProps } from "utils/theme";
 
-export const graphEditorStyles = createStyles("GraphEditor", (theme: ThemeProps) => ({
-  root: {},
-}));
+interface StyleProps {}
+
+export const graphEditorStyles = (props?: StyleProps) => {
+  const classes = createStyles("GraphEditor", (theme: ThemeProps) => ({
+    root: {},
+  }));
+
+  return classes();
+};

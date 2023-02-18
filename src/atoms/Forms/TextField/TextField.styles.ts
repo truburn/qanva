@@ -1,5 +1,10 @@
 import { createStyles, ThemeProps } from "utils/theme";
 
-export const textFieldStyles = createStyles("TextField", (theme: ThemeProps) => ({
-  root: {},
-}));
+interface StyleProps {}
+
+export const textFieldStyles = (props?: StyleProps) => {
+  const classes = createStyles("TextField", (theme: ThemeProps) => ({
+    root: {},
+  }));
+  return classes();
+};

@@ -1,5 +1,11 @@
 import { createStyles, ThemeProps } from "utils/theme";
 
-export const graphListStyles = createStyles("GraphList", (theme: ThemeProps) => ({
-  root: {},
-}));
+interface StyleProps {}
+
+export const graphListStyles = (props?: StyleProps) => {
+  const classes = createStyles("GraphList", (theme: ThemeProps) => ({
+    root: {},
+  }));
+
+  return classes();
+};

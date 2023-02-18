@@ -1,8 +1,13 @@
 import { createStyles, ThemeProps } from "utils/theme";
 
-export const controlPanelStyles = createStyles("ControlPanel", (theme: ThemeProps) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-  },
-}));
+interface StyleProps {}
+
+export const controlPanelStyles = (props?: StyleProps) => {
+  const classes = createStyles("ControlPanel", (theme: ThemeProps) => ({
+    root: {
+      display: "flex",
+      flexDirection: "column",
+    },
+  }));
+  return classes();
+};
