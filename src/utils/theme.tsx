@@ -1,8 +1,19 @@
 import { createUseStyles } from "react-jss";
+import chroma from "chroma-js";
+
+export enum ColorPreset {
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
+  SUCCESS = "success",
+  WARNING = "warning",
+  ERROR = "error",
+}
 
 export interface ColorProps {
   main: string;
   contrast: string;
+  dark?: string;
+  light?: string;
 }
 
 export interface ThemeProps {
@@ -16,18 +27,8 @@ export interface ThemeProps {
     success: ColorProps;
     warning: ColorProps;
   };
-}
-
-export enum FontFamily {
-  MAIN = `'Quicksand', sans-serif`,
-  HEADER = `'Rock Salt', cursive`,
-  HANDWRITING = `'Nothing You Could Do', cursive`,
-}
-
-export enum FontWeight {
-  THIN = 300,
-  REGULAR = 500,
-  BOLD = 700,
+  font: Record<string, string>;
+  fontWeight: Record<string, number>;
 }
 
 /**
@@ -61,32 +62,63 @@ export const createStyles = (name: string, styles: any, options?: any) =>
   createUseStyles(styles, { ...options, name });
 
 /**
+ * Colors
+ */
+const colorBG = chroma("#FFF6F5");
+const colorFG = chroma("#2F4858");
+const colorPrimary = chroma("#CF002E");
+const colorSecondary = chroma("#557B97");
+const colorError = chroma("#960007");
+const colorSuccess = chroma("#317600");
+const colorWarning = chroma("#FF5803");
+
+/**
  * Style Theme variables
  */
 export const theme: ThemeProps = {
   color: {
-    bg: "#FFF6F5",
-    fg: "#2F4858",
+    bg: colorBG.hex(),
+    fg: colorFG.hex(),
     primary: {
-      main: "#CF002E",
-      contrast: "#FFF6F5",
+      main: colorPrimary.hex(),
+      contrast: colorBG.hex(),
+      dark: colorPrimary.darken(2).hex(),
+      light: colorPrimary.brighten(2).hex(),
     },
     secondary: {
-      main: "#557B97",
+      main: colorSecondary.hex(),
       contrast: "#CFF6FF",
+      dark: colorSecondary.darken(2).hex(),
+      light: colorSecondary.brighten(2).hex(),
     },
     error: {
-      main: "#960007",
-      contrast: "#FFF6F5",
+      main: colorError.hex(),
+      contrast: colorBG.hex(),
+      dark: colorError.darken(2).hex(),
+      light: colorError.brighten(2).hex(),
     },
     success: {
-      main: "#317600",
+      main: colorSuccess.hex(),
       contrast: "#F3EED9",
+      dark: colorSuccess.darken(2).hex(),
+      light: colorSuccess.brighten(2).hex(),
     },
     warning: {
-      main: "#FF5803",
+      main: colorWarning.hex(),
       contrast: "#FFF5EC",
+      dark: colorWarning.darken(2).hex(),
+      light: colorWarning.brighten(2).hex(),
     },
+  },
+  font: {
+    main: `'Quicksand', sans-serif`,
+    header: `'Rock Salt', cursive`,
+    handwriting: `'Nothing You Could Do', cursive`,
+  },
+  fontWeight: {
+    thin: 300,
+    regular: 500,
+    bold: 700,
   },
 };
 
@@ -98,8 +130,8 @@ const useGlobalStyles = createUseStyles((theme: ThemeProps) => ({
     body: {
       width: "100%",
       height: "100%",
-      fontFamily: FontFamily.MAIN,
-      fontWeight: FontWeight.REGULAR,
+      fontFamily: theme.font.main,
+      fontWeight: theme.fontWeight.regular,
       margin: 0,
       padding: 0,
       background: theme.color.bg,
@@ -122,7 +154,7 @@ const useGlobalStyles = createUseStyles((theme: ThemeProps) => ({
       },
     },
     "h1, h2, h3": {
-      fontFamily: FontFamily.HEADER,
+      fontFamily: theme.font.header,
       color: theme.color.primary.main,
     },
   },
