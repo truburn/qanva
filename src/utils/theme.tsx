@@ -14,13 +14,32 @@ export interface ColorProps {
   contrast: string;
   dark?: string;
   light?: string;
+  border?: string;
+}
+
+export interface BorderRadius {
+  topLeft?: number | string;
+  topRight?: number | string;
+  bottomLeft?: number | string;
+  bottomRight?: number | string;
+}
+
+export interface BorderWidth {
+  top?: number | string;
+  right?: number | string;
+  bottom?: number | string;
+  left?: number | string;
 }
 
 export interface ThemeProps {
   [key: string]: any;
+  border: {
+    radius: number | string | BorderRadius;
+    width: number | string | BorderWidth;
+    style: string;
+  };
   color: {
-    bg: string;
-    fg: string;
+    base: ColorProps;
     primary: ColorProps;
     secondary: ColorProps;
     error: ColorProps;
@@ -76,38 +95,53 @@ const colorWarning = chroma("#FF5803");
  * Style Theme variables
  */
 export const theme: ThemeProps = {
+  border: {
+    radius: 8,
+    width: 1,
+    style: "solid",
+  },
   color: {
-    bg: colorBG.hex(),
-    fg: colorFG.hex(),
+    base: {
+      main: colorFG.hex(),
+      contrast: colorBG.hex(),
+      dark: colorFG.darken(2).hex(),
+      light: colorFG.brighten(2).hex(),
+      border: colorFG.brighten(3).hex(),
+    },
     primary: {
       main: colorPrimary.hex(),
       contrast: colorBG.hex(),
       dark: colorPrimary.darken(2).hex(),
       light: colorPrimary.brighten(2).hex(),
+      border: colorPrimary.brighten(3).hex(),
     },
     secondary: {
       main: colorSecondary.hex(),
       contrast: "#CFF6FF",
       dark: colorSecondary.darken(2).hex(),
       light: colorSecondary.brighten(2).hex(),
+      border: colorSecondary.brighten(3).hex(),
     },
     error: {
       main: colorError.hex(),
       contrast: colorBG.hex(),
       dark: colorError.darken(2).hex(),
       light: colorError.brighten(2).hex(),
+      border: colorError.brighten(3).hex(),
     },
     success: {
       main: colorSuccess.hex(),
       contrast: "#F3EED9",
       dark: colorSuccess.darken(2).hex(),
       light: colorSuccess.brighten(2).hex(),
+      border: colorSuccess.brighten(3).hex(),
     },
     warning: {
       main: colorWarning.hex(),
       contrast: "#FFF5EC",
       dark: colorWarning.darken(2).hex(),
       light: colorWarning.brighten(2).hex(),
+      border: colorWarning.brighten(3).hex(),
     },
   },
   font: {
@@ -134,8 +168,8 @@ const useGlobalStyles = createUseStyles((theme: ThemeProps) => ({
       fontWeight: theme.fontWeight.regular,
       margin: 0,
       padding: 0,
-      background: theme.color.bg,
-      color: theme.color.fg,
+      background: theme.color.base.contrast,
+      color: theme.color.base.main,
     },
     "#root": {
       width: "100%",
