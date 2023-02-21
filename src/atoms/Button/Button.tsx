@@ -8,7 +8,7 @@ import { classist } from "utils/theme";
  * Button element using React Aria
  */
 export const Button = (_props: ButtonProps) => {
-  const { variant, className, label, color, id, ...props } = _props;
+  const { variant, className, label, color, id, icon, iconAfter, iconOnly, ...props } = _props;
   const btnRef = useRef(null);
   const classes = buttonStyles(_props);
   const { buttonProps } = useButton(props, btnRef);
@@ -25,7 +25,13 @@ export const Button = (_props: ButtonProps) => {
       id={btnID}
       data-testid={btnID}
     >
-      {label}
+      {icon}
+      {!iconOnly && (
+        <>
+          <span>{label}</span>
+          {iconAfter}
+        </>
+      )}
     </button>
   );
 };

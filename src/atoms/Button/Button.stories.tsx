@@ -65,6 +65,11 @@ function render(args: ButtonProps) {
     id: [id, color].join("-"),
     color,
   }));
+  defaultVariant.unshift({
+    ...props,
+    label: `color = undefined`,
+    id: "color-undefined",
+  });
 
   const variants = Object.values(ButtonVariant).map((variant) => {
     const children: any[] = corners.map((roundCorners) => ({
