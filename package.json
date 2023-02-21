@@ -40,7 +40,7 @@
     "test:generate-output": "react-scripts test --watchAll=false --json --outputFile=.jest-test-results.json",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006 -s public",
-    "build-storybook": "storybook build -s public",
+    "build-storybook": "storybook build",
     "test-storybook": "test-storybook",
     "test-storybook:generate-output": "test-storybook --json --outputFile .storybook-test-results.json",
     "chromatic": "chromatic --exit-zero-on-changes"
