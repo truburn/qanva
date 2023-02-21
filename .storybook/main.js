@@ -40,4 +40,5 @@ module.exports = {
     autodocs: true,
     defaultName: "Overview",
   },
+  staticDirs: ["./public"],
 };
